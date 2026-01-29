@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Quiz Japonais (Kana)</title>
+<style>
+  :root {
+    --bg:#0b0c10;
+    --card:#151822;
+    --muted:#9aa3b2;
+    --text:#eef1f7;
+    --good:#3ddc97;
+    --bad:#ff6b6b;
+    --accent:#7aa2ff;
+    --btn:#20263a;
+    --btn2:#1a2032;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  body {
+    margin:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    background: radial-gradient(1200px 700px at 20% -10%, rgba(122,162,255,.25), transparent 60%),
+                radial-gradient(900px 600px at 90% 0%, rgba(61,220,151,.18), transparent 55%),
+                var(--bg);
+    color:var(--text);
+  }
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 18px 14px 24px;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  }
+  header {
+    display:flex; gap:12px; align-items:center; justify-content:space-between;
+    margin: 8px 0 14px;
+  }
+  .title {
+    display:flex; flex-direction:column; gap:4px;
+  }
+  h1 { font-size: 18px; margin:0; letter-spacing:.2px; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px;
+  }
+  .row {
+    display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  }
+  .pill {
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.08);
+    color: var(--muted);
+    font-size: 12px;
+  }
+  select, button, input[type="checkbox"] {
+    font: inherit;
+  }
+  select {
+    background: var(--btn2);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+  .main {
+    margin-top: 12px;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .q {
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .prompt {
+    text-align:center;
+    font-size: clamp(28px, 6vw, 44px);
+    font-weight: 700;
+    letter-spacing: .5px;
+    padding: 16px 10px 8px;
+  }
+  .hint {
+    text-align:center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: -6px;
+  }
+  .choices {
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .choice {
+    width:100%;
+    text-align:left;
+    padding: 14px 14px;
+    border-radius: 14px;
+    background: var(--btn);
+    border: 1px solid rgba(255,255,255,.12);
+    color: var(--text);
+    cursor:pointer;
+    transition: transform .05s ease, background .15s ease, border-color .15s ease;
+  }
+  .choice:active {
+    transform: scale(.99);
+  }
+  .choice[disabled] {
+    opacity: .7;
+    cursor: default;
+  }
+  .choice.good {
+    border-color: rgba(61,220,151,.75);
+    background: rgba(61,220,151,.12);
+  }
+  .choice.bad {
+    border-color: rgba(255,107,107,.75);
+    background: rgba(255,107,107,.10);
+  }
+  .footer {
+    display:flex;
+    gap:10px;
+    margin-top: 10px;
+    flex-wrap:wrap;
+  }
+  .btn {
+    flex:1;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--btn2);
+    border: 1px solid rgba(255,255,255,.12);
+    color: var(--text);
+    cursor:pointer;
+  }
+  .btn.secondary {
+    flex:0 0 auto;
+  }
+  .stats {
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .stat {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    padding: 10px 12px;
+  }
+  .stat .k {
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .stat .v {
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 2px;
+  }
+  .small {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.35;
+  }
+  .divider {
+    height:1px; background: rgba(255,255,255,.08);
+    margin: 12px 0;
+  }
+  .tag {
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title">
+      <h1>Quiz Japonais — Kana uniquement</h1>
+      <div class="sub">4 choix • feedback immédiat • rejouer les erreurs</div>
+    </div>
+    <div class="row">
+      <span class="pill" id="countPill"></span>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between;">
+      <div class="row" style="gap:8px;">
+        <label class="tag">Mode</label>
+        <select id="mode">
+          <option value="jp2fr">JP → FR</option>
+          <option value="fr2jp">FR → JP</option>
+        </select>
+      </div>
+
+      <div class="row" style="gap:8px;">
+        <label class="tag" for="onlyWrong">
+          <input id="onlyWrong" type="checkbox"/> Rejouer les erreurs
+        </label>
+        <button class="btn secondary" id="reset">Reset</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="main">
+      <div class="q">
+        <div class="prompt" id="prompt">…</div>
+        <div class="hint" id="hint">…</div>
+        <div class="choices" id="choices"></div>
+        <div class="footer">
+          <button class="btn" id="next">Question suivante</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="k">Score</div>
+            <div class="v" id="score">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Série</div>
+            <div class="v" id="streak">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Progression</div>
+            <div class="v" id="progress">0/0</div>
+          </div>
+        </div>
+
+        <div class="small">
+          Astuce : ajoute cette page à ton écran d’accueil (Safari/Chrome → Partager → “Sur l’écran d’accueil”) pour l’utiliser comme une app.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const VOCAB = [{"jp": "教会", "fr": "église"}, {"jp": "(お)城", "fr": "château"}, {"jp": "神社", "fr": "sanctuaire (shinto)"}, {"jp": "(お)寺", "fr": "temple"}, {"jp": "ビル", "fr": "immeuble / bâtiment"}, {"jp": "ところ", "fr": "endroit / lieu"}, {"jp": "人", "fr": "personne / gens"}, {"jp": "緑", "fr": "vert"}, {"jp": "あります（ある）", "fr": "il y a / exister"}, {"jp": "新しい", "fr": "nouveau"}, {"jp": "古い", "fr": "ancien / vieux"}, {"jp": "いい", "fr": "bon"}, {"jp": "（〜が）多い", "fr": "beaucoup de ~"}, {"jp": "（〜が）少ない", "fr": "peu de ~"}, {"jp": "大きい", "fr": "grand"}, {"jp": "小さい", "fr": "petit"}, {"jp": "高い", "fr": "haut / grand (taille)"}, {"jp": "低い", "fr": "bas"}, {"jp": "きれい（な）", "fr": "beau / propre"}, {"jp": "静か（な）", "fr": "calme / silencieux"}, {"jp": "にぎやか（な）", "fr": "animé"}, {"jp": "有名（な）", "fr": "célèbre"}, {"jp": "どんな", "fr": "quel / comment (état)"}, {"jp": "そして", "fr": "et (puis)"}, {"jp": "天気がいい", "fr": "il fait beau / beau temps"}, {"jp": "天気が悪い", "fr": "il fait mauvais / mauvais temps"}, {"jp": "暖かい", "fr": "chaud (doux)"}, {"jp": "熱い", "fr": "chaud (au toucher)"}, {"jp": "冷たい", "fr": "froid (au toucher)"}, {"jp": "おいしい", "fr": "délicieux"}, {"jp": "甘い", "fr": "sucré"}, {"jp": "辛い", "fr": "épicé / piquant"}, {"jp": "苦い", "fr": "amer"}, {"jp": "すっぱい", "fr": "acide"}, {"jp": "一年中", "fr": "toute l'année"}, {"jp": "あまり", "fr": "pas très / pas tellement"}, {"jp": "少し", "fr": "un peu"}, {"jp": "とても", "fr": "très"}, {"jp": "どう", "fr": "comment"}, {"jp": "そうですね", "fr": "oui, c’est ça / en effet"}, {"jp": "たくさん", "fr": "beaucoup"}, {"jp": "雨", "fr": "pluie"}, {"jp": "雪", "fr": "neige"}, {"jp": "日（ひ）", "fr": "jour"}, {"jp": "メロン", "fr": "melon"}, {"jp": "涼しい", "fr": "frais"}, {"jp": "暑い", "fr": "chaud (météo)"}, {"jp": "寒い", "fr": "froid (météo)"}, {"jp": "チョコレート", "fr": "chocolat"}, {"jp": "美術館", "fr": "musée d'art"}, {"jp": "皆さん", "fr": "tout le monde"}, {"jp": "いろいろ（な）", "fr": "divers / plusieurs sortes"}, {"jp": "ぜひ来てください", "fr": "venez, je vous en prie"}, {"jp": "北", "fr": "nord"}, {"jp": "南", "fr": "sud"}, {"jp": "東", "fr": "est"}, {"jp": "西", "fr": "ouest"}, {"jp": "真ん中", "fr": "milieu / centre"}, {"jp": "車", "fr": "voiture"}, {"jp": "新幹線", "fr": "Shinkansen (TGV japonais)"}, {"jp": "電車", "fr": "train"}, {"jp": "飛行機", "fr": "avion"}, {"jp": "駅", "fr": "gare"}, {"jp": "町", "fr": "ville / bourg"}, {"jp": "〜時間", "fr": "~ heures"}, {"jp": "〜時間半", "fr": "~ heures et demie"}, {"jp": "〜分", "fr": "~ minutes"}, {"jp": "歩いて", "fr": "à pied / en marchant"}, {"jp": "〜ぐらい", "fr": "environ"}, {"jp": "どのくらい", "fr": "combien de temps ? / à peu près combien ?"}, {"jp": "温泉", "fr": "source chaude / onsen"}, {"jp": "川", "fr": "rivière"}, {"jp": "山", "fr": "montagne"}, {"jp": "花火", "fr": "feux d'artifice"}, {"jp": "（お）花見", "fr": "hanami (voir les fleurs)"}, {"jp": "ホームステイ", "fr": "séjour en famille d'accueil"}, {"jp": "（お）祭り", "fr": "festival"}, {"jp": "海", "fr": "mer / océan"}, {"jp": "公園", "fr": "parc"}, {"jp": "桜", "fr": "fleurs de cerisier"}, {"jp": "（お）酒", "fr": "alcool / saké"}, {"jp": "（お）すし", "fr": "sushi"}, {"jp": "バス", "fr": "bus"}, {"jp": "（お）弁当", "fr": "bento"}, {"jp": "留学生", "fr": "étudiant étranger"}, {"jp": "１年", "fr": "1 an (une année)"}, {"jp": "春", "fr": "printemps"}, {"jp": "夏", "fr": "été"}, {"jp": "秋", "fr": "automne"}, {"jp": "冬", "fr": "hiver"}, {"jp": "ゴールデンウィーク", "fr": "Golden Week"}, {"jp": "何", "fr": "quoi"}, {"jp": "行きます（行く）", "fr": "aller"}, {"jp": "帰ります（帰る）", "fr": "rentrer / retourner"}, {"jp": "飲みます（飲む）", "fr": "boire"}, {"jp": "食べます（食べる）", "fr": "manger"}, {"jp": "見ます（見る）", "fr": "voir / regarder"}, {"jp": "します（する）", "fr": "faire"}, {"jp": "スキーをします", "fr": "faire du ski"}, {"jp": "いいですね", "fr": "c'est bien / sympa"}, {"jp": "えっ", "fr": "hein ? / quoi ?"}, {"jp": "へえ", "fr": "ah bon ?"}, {"jp": "朝", "fr": "matin"}, {"jp": "夜", "fr": "nuit / soir"}, {"jp": "毎日", "fr": "tous les jours"}, {"jp": "毎朝", "fr": "tous les matins"}, {"jp": "毎晩", "fr": "tous les soirs"}, {"jp": "朝ご飯", "fr": "petit-déjeuner"}, {"jp": "昼ご飯", "fr": "déjeuner"}, {"jp": "うち", "fr": "maison / chez moi"}, {"jp": "会社", "fr": "entreprise / bureau"}, {"jp": "学校", "fr": "école"}, {"jp": "コンビニ", "fr": "supérette (konbini)"}, {"jp": "牛乳", "fr": "lait"}, {"jp": "果物", "fr": "fruit"}, {"jp": "サラダ", "fr": "salade"}, {"jp": "チーズ", "fr": "fromage"}, {"jp": "新聞", "fr": "journal"}, {"jp": "テレビ", "fr": "télévision"}, {"jp": "メール", "fr": "e-mail"}, {"jp": "何も", "fr": "rien"}, {"jp": "どこ（へ）も", "fr": "nulle part"}, {"jp": "買います（買う）", "fr": "acheter"}, {"jp": "聞きます（聞く）", "fr": "écouter"}, {"jp": "働きます（働く）", "fr": "travailler"}, {"jp": "読みます（読む）", "fr": "lire"}, {"jp": "起きます（起きる）", "fr": "se réveiller / se lever"}, {"jp": "寝ます（寝る）", "fr": "dormir / se coucher"}, {"jp": "勉強します（勉強する）", "fr": "étudier"}, {"jp": "来ます（来る）", "fr": "venir"}, {"jp": "これから", "fr": "à partir de maintenant"}, {"jp": "週末", "fr": "week-end"}, {"jp": "今", "fr": "maintenant"}, {"jp": "午前", "fr": "A.M. / matin (avant-midi)"}, {"jp": "午後", "fr": "P.M. / après-midi"}, {"jp": "昼", "fr": "après-midi / midi (selon contexte)"}, {"jp": "銀行", "fr": "banque"}, {"jp": "体育館", "fr": "gymnase"}, {"jp": "図書館", "fr": "bibliothèque"}, {"jp": "病院", "fr": "hôpital"}, {"jp": "郵便局", "fr": "bureau de poste"}, {"jp": "授業", "fr": "cours"}, {"jp": "テスト", "fr": "test / examen"}, {"jp": "休み", "fr": "fermé / repos / congé"}, {"jp": "時間", "fr": "temps / heure(s)"}, {"jp": "〜時", "fr": "~ heure(s) (pour l'heure)"}, {"jp": "〜分（pour l'heure）", "fr": "~ minute(s) (pour l'heure)"}, {"jp": "〜時半", "fr": "~h30"}, {"jp": "〜曜日", "fr": "~ jour (ex: lundi)"}, {"jp": "スケジュール", "fr": "planning / emploi du temps"}, {"jp": "アルバイト", "fr": "petit boulot / job à temps partiel"}, {"jp": "スキー", "fr": "ski"}, {"jp": "パーティー", "fr": "fête"}, {"jp": "バーベキュー", "fr": "barbecue"}];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function sample(arr, n, excludeSet = new Set()) {
+  const pool = arr.filter(x => !excludeSet.has(x));
+  shuffle(pool);
+  return pool.slice(0, n);
+}
+
+const LS_KEY = "jp_quiz_kana_v1";
+const state = {
+  mode: "jp2fr",
+  score: 0,
+  streak: 0,
+  seen: 0,
+  correct: 0,
+  wrongSet: new Set(),
+  lastWasWrong: false,
+  current: null,
+  answered: false
+};
+
+function load() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return;
+    const s = JSON.parse(raw);
+    state.mode = s.mode ?? state.mode;
+    state.score = s.score ?? 0;
+    state.streak = s.streak ?? 0;
+    state.seen = s.seen ?? 0;
+    state.correct = s.correct ?? 0;
+    state.wrongSet = new Set(s.wrong ?? []);
+  } catch (e) {}
+}
+
+function save() {
+  const payload = {
+    mode: state.mode,
+    score: state.score,
+    streak: state.streak,
+    seen: state.seen,
+    correct: state.correct,
+    wrong: Array.from(state.wrongSet)
+  };
+  localStorage.setItem(LS_KEY, JSON.stringify(payload));
+}
+
+const el = {
+  mode: document.getElementById("mode"),
+  onlyWrong: document.getElementById("onlyWrong"),
+  reset: document.getElementById("reset"),
+  prompt: document.getElementById("prompt"),
+  hint: document.getElementById("hint"),
+  choices: document.getElementById("choices"),
+  next: document.getElementById("next"),
+  score: document.getElementById("score"),
+  streak: document.getElementById("streak"),
+  progress: document.getElementById("progress"),
+  countPill: document.getElementById("countPill"),
+};
+
+function getPool() {
+  if (el.onlyWrong.checked) {
+    const wrong = VOCAB.filter(v => state.wrongSet.has(v.jp));
+    return wrong.length ? wrong : VOCAB;
+  }
+  return VOCAB;
+}
+
+function makeQuestion() {
+  const pool = getPool();
+  const correct = pool[Math.floor(Math.random() * pool.length)];
+  const distractPool = pool.filter(v => v.jp !== correct.jp);
+  const distractors = sample(distractPool, 3);
+
+  const options = shuffle([correct, ...distractors]);
+
+  // Build UI
+  state.current = { correct, options };
+  state.answered = false;
+
+  const mode = state.mode;
+  const promptText = (mode === "jp2fr") ? correct.jp : correct.fr;
+  const hintText = (mode === "jp2fr") ? "Choisis la traduction en français" : "Choisis le mot japonais (kana)";
+
+  el.prompt.textContent = promptText;
+  el.hint.textContent = hintText;
+
+  el.choices.innerHTML = "";
+  options.forEach((opt) => {
+    const b = document.createElement("button");
+    b.className = "choice";
+    b.type = "button";
+    b.textContent = (mode === "jp2fr") ? opt.fr : opt.jp;
+    b.addEventListener("click", () => answer(opt, b));
+    el.choices.appendChild(b);
+  });
+
+  updateStats();
+}
+
+function answer(selected, btn) {
+  if (state.answered) return;
+  state.answered = true;
+
+  const { correct, options } = state.current;
+  const isCorrect = (selected.jp === correct.jp);
+
+  // Mark buttons
+  const buttons = Array.from(el.choices.querySelectorAll("button"));
+  buttons.forEach((b, idx) => {
+    b.disabled = true;
+    const opt = options[idx];
+    if (opt.jp === correct.jp) b.classList.add("good");
+    if (opt.jp === selected.jp && !isCorrect) b.classList.add("bad");
+  });
+
+  state.seen += 1;
+
+  if (isCorrect) {
+    state.correct += 1;
+    state.score += 1;
+    state.streak += 1;
+    state.wrongSet.delete(correct.jp);
+  } else {
+    state.streak = 0;
+    state.wrongSet.add(correct.jp);
+  }
+
+  save();
+  updateStats();
+}
+
+function updateStats() {
+  el.score.textContent = state.score;
+  el.streak.textContent = state.streak;
+
+  const total = VOCAB.length;
+  const pct = total ? Math.round((state.correct / Math.max(1, state.seen)) * 100) : 0;
+  el.progress.textContent = `${state.correct}/${state.seen} (${pct}%)`;
+  el.countPill.textContent = `${VOCAB.length} mots`;
+}
+
+el.mode.addEventListener("change", () => {
+  state.mode = el.mode.value;
+  save();
+  makeQuestion();
+});
+
+el.onlyWrong.addEventListener("change", () => {
+  makeQuestion();
+});
+
+el.next.addEventListener("click", () => {
+  makeQuestion();
+});
+
+el.reset.addEventListener("click", () => {
+  if (!confirm("Remettre le score et les erreurs à zéro ?")) return;
+  localStorage.removeItem(LS_KEY);
+  state.score = 0;
+  state.streak = 0;
+  state.seen = 0;
+  state.correct = 0;
+  state.wrongSet = new Set();
+  makeQuestion();
+});
+
+// init
+load();
+el.mode.value = state.mode;
+updateStats();
+makeQuestion();
+</script>
+</body>
+</html>
