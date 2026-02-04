@@ -244,7 +244,513 @@
 </div>
 
 <script>
-const VOCAB = [{"jp": "教会", "fr": "église", "reading": "きょうかい", "jp_html": "<ruby>教会<rt>きょうかい</rt></ruby>"}, {"jp": "(お)城", "fr": "château", "reading": "おしろ", "jp_html": "<ruby>(<rt></rt></ruby>お)城"}, {"jp": "神社", "fr": "sanctuaire (shinto)", "reading": "じんじゃ", "jp_html": "<ruby>神社<rt>じんじゃ</rt></ruby>"}, {"jp": "(お)寺", "fr": "temple", "reading": "おてら", "jp_html": "<ruby>(<rt></rt></ruby>お)寺"}, {"jp": "ビル", "fr": "immeuble / bâtiment", "reading": "", "jp_html": "ビル"}, {"jp": "ところ", "fr": "endroit / lieu", "reading": "", "jp_html": "ところ"}, {"jp": "人", "fr": "personne / gens", "reading": "ひと", "jp_html": "<ruby>人<rt>ひと</rt></ruby>"}, {"jp": "緑", "fr": "vert", "reading": "みどり", "jp_html": "<ruby>緑<rt>みどり</rt></ruby>"}, {"jp": "美術館", "fr": "musée d'art", "reading": "びじゅつかん", "jp_html": "<ruby>美術館<rt>びじゅつかん</rt></ruby>"}, {"jp": "駅", "fr": "gare", "reading": "えき", "jp_html": "<ruby>駅<rt>えき</rt></ruby>"}, {"jp": "町", "fr": "ville / bourg", "reading": "まち", "jp_html": "<ruby>町<rt>まち</rt></ruby>"}, {"jp": "温泉", "fr": "source chaude / onsen", "reading": "おんせん", "jp_html": "<ruby>温泉<rt>おんせん</rt></ruby>"}, {"jp": "川", "fr": "rivière", "reading": "かわ", "jp_html": "<ruby>川<rt>かわ</rt></ruby>"}, {"jp": "山", "fr": "montagne", "reading": "やま", "jp_html": "<ruby>山<rt>やま</rt></ruby>"}, {"jp": "海", "fr": "mer / océan", "reading": "うみ", "jp_html": "<ruby>海<rt>うみ</rt></ruby>"}, {"jp": "公園", "fr": "parc", "reading": "こうえん", "jp_html": "<ruby>公園<rt>こうえん</rt></ruby>"}, {"jp": "図書館", "fr": "bibliothèque", "reading": "としょかん", "jp_html": "<ruby>図書館<rt>としょかん</rt></ruby>"}, {"jp": "病院", "fr": "hôpital", "reading": "びょういん", "jp_html": "<ruby>病院<rt>びょういん</rt></ruby>"}, {"jp": "郵便局", "fr": "bureau de poste", "reading": "ゆうびんきょく", "jp_html": "<ruby>郵便局<rt>ゆうびんきょく</rt></ruby>"}, {"jp": "銀行", "fr": "banque", "reading": "ぎんこう", "jp_html": "<ruby>銀行<rt>ぎんこう</rt></ruby>"}, {"jp": "体育館", "fr": "gymnase", "reading": "たいいくかん", "jp_html": "<ruby>体育館<rt>たいいくかん</rt></ruby>"}, {"jp": "会社", "fr": "entreprise / bureau", "reading": "かいしゃ", "jp_html": "<ruby>会社<rt>かいしゃ</rt></ruby>"}, {"jp": "学校", "fr": "école", "reading": "がっこう", "jp_html": "<ruby>学校<rt>がっこう</rt></ruby>"}, {"jp": "コンビニ", "fr": "supérette (konbini)", "reading": "", "jp_html": "コンビニ"}, {"jp": "うち", "fr": "maison / chez moi", "reading": "", "jp_html": "うち"}, {"jp": "新しい", "fr": "nouveau", "reading": "あたらしい", "jp_html": "<ruby>新<rt>あたら</rt></ruby>しい"}, {"jp": "古い", "fr": "ancien / vieux", "reading": "ふるい", "jp_html": "<ruby>古<rt>ふる</rt></ruby>い"}, {"jp": "いい", "fr": "bon", "reading": "", "jp_html": "いい"}, {"jp": "大きい", "fr": "grand", "reading": "おおきい", "jp_html": "<ruby>大<rt>おお</rt></ruby>きい"}, {"jp": "小さい", "fr": "petit", "reading": "ちいさい", "jp_html": "<ruby>小<rt>ちい</rt></ruby>さい"}, {"jp": "高い", "fr": "haut / grand (taille)", "reading": "たかい", "jp_html": "<ruby>高<rt>たか</rt></ruby>い"}, {"jp": "低い", "fr": "bas", "reading": "ひくい", "jp_html": "<ruby>低<rt>ひく</rt></ruby>い"}, {"jp": "きれい（な）", "fr": "beau / propre", "reading": "", "jp_html": "きれい（な）"}, {"jp": "静か（な）", "fr": "calme / silencieux", "reading": "しずか", "jp_html": "<ruby>静<rt>しず</rt></ruby>か（な）"}, {"jp": "にぎやか（な）", "fr": "animé", "reading": "", "jp_html": "にぎやか（な）"}, {"jp": "有名（な）", "fr": "célèbre", "reading": "ゆうめい", "jp_html": "<ruby>有名（<rt>ゆう</rt></ruby>な）"}, {"jp": "暖かい", "fr": "chaud (doux)", "reading": "あたたかい", "jp_html": "<ruby>暖<rt>あたた</rt></ruby>かい"}, {"jp": "涼しい", "fr": "frais", "reading": "すずしい", "jp_html": "<ruby>涼<rt>すず</rt></ruby>しい"}, {"jp": "暑い", "fr": "chaud (météo)", "reading": "あつい", "jp_html": "<ruby>暑<rt>あつ</rt></ruby>い"}, {"jp": "寒い", "fr": "froid (météo)", "reading": "さむい", "jp_html": "<ruby>寒<rt>さむ</rt></ruby>い"}, {"jp": "天気がいい", "fr": "il fait beau / beau temps", "reading": "てんきがいい", "jp_html": "<ruby>天気<rt>てんき</rt></ruby>がいい"}, {"jp": "天気が悪い", "fr": "il fait mauvais / mauvais temps", "reading": "てんきがわるい", "jp_html": "<ruby>天気<rt>てんきが</rt></ruby>が悪い"}, {"jp": "温かい", "fr": "chaud (doux)", "reading": "あたたかい", "jp_html": "<ruby>温<rt>あたた</rt></ruby>かい"}, {"jp": "熱い", "fr": "chaud (au toucher)", "reading": "あつい", "jp_html": "<ruby>熱<rt>あつ</rt></ruby>い"}, {"jp": "冷たい", "fr": "froid (au toucher)", "reading": "つめたい", "jp_html": "<ruby>冷<rt>つめ</rt></ruby>たい"}, {"jp": "おいしい", "fr": "délicieux", "reading": "", "jp_html": "おいしい"}, {"jp": "甘い", "fr": "sucré", "reading": "あまい", "jp_html": "<ruby>甘<rt>あま</rt></ruby>い"}, {"jp": "辛い", "fr": "épicé / piquant", "reading": "からい", "jp_html": "<ruby>辛<rt>から</rt></ruby>い"}, {"jp": "苦い", "fr": "amer", "reading": "にがい", "jp_html": "<ruby>苦<rt>にが</rt></ruby>い"}, {"jp": "すっぱい", "fr": "acide", "reading": "", "jp_html": "すっぱい"}, {"jp": "（〜が）多い", "fr": "beaucoup de ~", "reading": "おおい", "jp_html": "<ruby>（〜<rt>おお</rt></ruby>が）多い"}, {"jp": "（〜が）少ない", "fr": "peu de ~", "reading": "すくない", "jp_html": "<ruby>（〜<rt>すくな</rt></ruby>が）少ない"}, {"jp": "たくさん", "fr": "beaucoup", "reading": "", "jp_html": "たくさん"}, {"jp": "少し", "fr": "un peu", "reading": "すこし", "jp_html": "<ruby>少<rt>すこ</rt></ruby>し"}, {"jp": "とても", "fr": "très", "reading": "", "jp_html": "とても"}, {"jp": "あまり", "fr": "pas très / pas tellement", "reading": "", "jp_html": "あまり"}, {"jp": "〜ぐらい", "fr": "environ", "reading": "", "jp_html": "〜ぐらい"}, {"jp": "一年中", "fr": "toute l'année", "reading": "いちねんじゅう", "jp_html": "<ruby>一年中<rt>いちねんじゅう</rt></ruby>"}, {"jp": "朝", "fr": "matin", "reading": "あさ", "jp_html": "<ruby>朝<rt>あさ</rt></ruby>"}, {"jp": "夜", "fr": "nuit / soir", "reading": "よる", "jp_html": "<ruby>夜<rt>よる</rt></ruby>"}, {"jp": "毎日", "fr": "tous les jours", "reading": "まいにち", "jp_html": "<ruby>毎日<rt>まいにち</rt></ruby>"}, {"jp": "毎朝", "fr": "tous les matins", "reading": "まいあさ", "jp_html": "<ruby>毎朝<rt>まいあさ</rt></ruby>"}, {"jp": "毎晩", "fr": "tous les soirs", "reading": "まいばん", "jp_html": "<ruby>毎晩<rt>まいばん</rt></ruby>"}, {"jp": "昼", "fr": "après-midi / midi (selon contexte)", "reading": "ひる", "jp_html": "<ruby>昼<rt>ひる</rt></ruby>"}, {"jp": "今", "fr": "maintenant", "reading": "いま", "jp_html": "<ruby>今<rt>いま</rt></ruby>"}, {"jp": "午前", "fr": "A.M. / matin (avant-midi)", "reading": "ごぜん", "jp_html": "<ruby>午前<rt>ごぜん</rt></ruby>"}, {"jp": "午後", "fr": "P.M. / après-midi", "reading": "ごご", "jp_html": "<ruby>午後<rt>ごご</rt></ruby>"}, {"jp": "週末", "fr": "week-end", "reading": "しゅうまつ", "jp_html": "<ruby>週末<rt>しゅうまつ</rt></ruby>"}, {"jp": "時間", "fr": "temps / heure(s)", "reading": "じかん", "jp_html": "<ruby>時間<rt>じかん</rt></ruby>"}, {"jp": "休み", "fr": "fermé / repos / congé", "reading": "やすみ", "jp_html": "<ruby>休<rt>やす</rt></ruby>み"}, {"jp": "〜時", "fr": "~ heure(s) (pour l'heure)", "reading": "じ", "jp_html": "<ruby>〜時<rt>じ</rt></ruby>"}, {"jp": "〜分", "fr": "~ minutes", "reading": "ふん", "jp_html": "<ruby>〜分<rt>ふん</rt></ruby>"}, {"jp": "〜時半", "fr": "~h30", "reading": "じはん", "jp_html": "<ruby>〜時半<rt>じはん</rt></ruby>"}, {"jp": "〜曜日", "fr": "~ jour (ex: lundi)", "reading": "ようび", "jp_html": "<ruby>〜曜日<rt>ようび</rt></ruby>"}, {"jp": "１年", "fr": "1 an (une année)", "reading": "いちねん", "jp_html": "<ruby>１年<rt>いちねん</rt></ruby>"}, {"jp": "北", "fr": "nord", "reading": "きた", "jp_html": "<ruby>北<rt>きた</rt></ruby>"}, {"jp": "南", "fr": "sud", "reading": "みなみ", "jp_html": "<ruby>南<rt>みなみ</rt></ruby>"}, {"jp": "東", "fr": "est", "reading": "ひがし", "jp_html": "<ruby>東<rt>ひがし</rt></ruby>"}, {"jp": "西", "fr": "ouest", "reading": "にし", "jp_html": "<ruby>西<rt>にし</rt></ruby>"}, {"jp": "真ん中", "fr": "milieu / centre", "reading": "まんなか", "jp_html": "<ruby>真<rt>まん</rt></ruby>ん中"}, {"jp": "電車", "fr": "train", "reading": "でんしゃ", "jp_html": "<ruby>電車<rt>でんしゃ</rt></ruby>"}, {"jp": "飛行機", "fr": "avion", "reading": "ひこうき", "jp_html": "<ruby>飛行機<rt>ひこうき</rt></ruby>"}, {"jp": "車", "fr": "voiture", "reading": "くるま", "jp_html": "<ruby>車<rt>くるま</rt></ruby>"}, {"jp": "新幹線", "fr": "Shinkansen (TGV japonais)", "reading": "しんかんせん", "jp_html": "<ruby>新幹線<rt>しんかんせん</rt></ruby>"}, {"jp": "バス", "fr": "bus", "reading": "", "jp_html": "バス"}, {"jp": "歩いて", "fr": "à pied / en marchant", "reading": "あるいて", "jp_html": "<ruby>歩<rt>ある</rt></ruby>いて"}, {"jp": "メロン", "fr": "melon", "reading": "", "jp_html": "メロン"}, {"jp": "チョコレート", "fr": "chocolat", "reading": "", "jp_html": "チョコレート"}, {"jp": "（お）酒", "fr": "alcool / saké", "reading": "おさけ", "jp_html": "<ruby>（<rt></rt></ruby>お）酒"}, {"jp": "（お）すし", "fr": "sushi", "reading": "おすし", "jp_html": "（お）すし"}, {"jp": "（お）弁当", "fr": "bento", "reading": "おべんとう", "jp_html": "<ruby>（<rt>お</rt></ruby>お）弁当"}, {"jp": "牛乳", "fr": "lait", "reading": "ぎゅうにゅう", "jp_html": "<ruby>牛乳<rt>ぎゅうにゅう</rt></ruby>"}, {"jp": "果物", "fr": "fruit", "reading": "くだもの", "jp_html": "<ruby>果物<rt>くだもの</rt></ruby>"}, {"jp": "サラダ", "fr": "salade", "reading": "", "jp_html": "サラダ"}, {"jp": "チーズ", "fr": "fromage", "reading": "", "jp_html": "チーズ"}, {"jp": "行きます", "fr": "aller", "reading": "いきます", "jp_html": "<ruby>行<rt>い</rt></ruby>きます"}, {"jp": "帰ります", "fr": "rentrer / retourner", "reading": "かえります", "jp_html": "<ruby>帰<rt>かえ</rt></ruby>ります"}, {"jp": "飲みます", "fr": "boire", "reading": "のみます", "jp_html": "<ruby>飲<rt>の</rt></ruby>みます"}, {"jp": "食べます", "fr": "manger", "reading": "たべます", "jp_html": "<ruby>食<rt>た</rt></ruby>べます"}, {"jp": "見ます", "fr": "voir / regarder", "reading": "みます", "jp_html": "<ruby>見<rt>み</rt></ruby>ます"}, {"jp": "します", "fr": "faire", "reading": "します", "jp_html": "します"}, {"jp": "聞きます", "fr": "écouter", "reading": "ききます", "jp_html": "<ruby>聞<rt>き</rt></ruby>きます"}, {"jp": "働きます", "fr": "travailler", "reading": "はたらきます", "jp_html": "<ruby>働<rt>はたら</rt></ruby>きます"}, {"jp": "読みます", "fr": "lire", "reading": "よみます", "jp_html": "<ruby>読<rt>よ</rt></ruby>みます"}, {"jp": "起きます", "fr": "se réveiller / se lever", "reading": "おきます", "jp_html": "<ruby>起<rt>お</rt></ruby>きます"}, {"jp": "寝ます", "fr": "dormir / se coucher", "reading": "ねます", "jp_html": "<ruby>寝<rt>ね</rt></ruby>ます"}, {"jp": "勉強します", "fr": "étudier", "reading": "べんきょうします", "jp_html": "<ruby>勉強<rt>べんきょう</rt></ruby>します"}, {"jp": "来ます", "fr": "venir", "reading": "きます", "jp_html": "<ruby>来<rt>き</rt></ruby>ます"}, {"jp": "買います", "fr": "acheter", "reading": "かいます", "jp_html": "<ruby>買<rt>か</rt></ruby>います"}, {"jp": "あります", "fr": "il y a / exister", "reading": "あります", "jp_html": "あります"}, {"jp": "皆さん", "fr": "tout le monde", "reading": "みなさん", "jp_html": "<ruby>皆<rt>みな</rt></ruby>さん"}, {"jp": "いろいろ（な）", "fr": "divers / plusieurs sortes", "reading": "", "jp_html": "いろいろ（な）"}, {"jp": "ぜひ来てください", "fr": "venez, je vous en prie", "reading": "ぜひきてください", "jp_html": "<ruby><rt></rt></ruby>ぜひ来てください"}, {"jp": "どんな", "fr": "quel / comment (état)", "reading": "", "jp_html": "どんな"}, {"jp": "どう", "fr": "comment", "reading": "", "jp_html": "どう"}, {"jp": "何", "fr": "quoi", "reading": "なに", "jp_html": "<ruby>何<rt>なに</rt></ruby>"}, {"jp": "何も", "fr": "rien", "reading": "なにも", "jp_html": "<ruby>何<rt>なに</rt></ruby>も"}, {"jp": "どこ（へ）も", "fr": "nulle part", "reading": "", "jp_html": "どこ（へ）も"}, {"jp": "そうですね", "fr": "oui, c’est ça / en effet", "reading": "", "jp_html": "そうですね"}, {"jp": "いいですね", "fr": "c'est bien / sympa", "reading": "", "jp_html": "いいですね"}, {"jp": "えっ", "fr": "hein ? / quoi ?", "reading": "", "jp_html": "えっ"}, {"jp": "へえ", "fr": "ah bon ?", "reading": "", "jp_html": "へえ"}, {"jp": "これから", "fr": "à partir de maintenant", "reading": "", "jp_html": "これから"}];
+  const VOCAB = [
+  {
+    "jp": "教会",
+    "fr": "église",
+    "reading": "きょうかい",
+    "jp_html": "<ruby>教会<rt>きょうかい</rt></ruby>"
+  },
+  {
+    "jp": "(お)城",
+    "fr": "château",
+    "reading": "おしろ",
+    "jp_html": "<ruby>城<rt>しろ</rt></ruby>"
+  },
+  {
+    "jp": "神社",
+    "fr": "sanctuaire (shinto)",
+    "reading": "じんじゃ",
+    "jp_html": "<ruby>神社<rt>じんじゃ</rt></ruby>"
+  },
+  {
+    "jp": "(お)寺",
+    "fr": "temple",
+    "reading": "おてら",
+    "jp_html": "<ruby>寺<rt>てら</rt></ruby>"
+  },
+  {
+    "jp": "ビル",
+    "fr": "immeuble / bâtiment",
+    "reading": "",
+    "jp_html": "ビル"
+  },
+  {
+    "jp": "ところ",
+    "fr": "endroit / lieu",
+    "reading": "",
+    "jp_html": "ところ"
+  },
+  {
+    "jp": "人",
+    "fr": "personne / gens",
+    "reading": "ひと",
+    "jp_html": "<ruby>人<rt>ひと</rt></ruby>"
+  },
+  {
+    "jp": "緑",
+    "fr": "vert",
+    "reading": "みどり",
+    "jp_html": "<ruby>緑<rt>みどり</rt></ruby>"
+  },
+  {
+    "jp": "美術館",
+    "fr": "musée d'art",
+    "reading": "びじゅつかん",
+    "jp_html": "<ruby>美術館<rt>びじゅつかん</rt></ruby>"
+  },
+  {
+    "jp": "駅",
+    "fr": "gare",
+    "reading": "えき",
+    "jp_html": "<ruby>駅<rt>えき</rt></ruby>"
+  },
+  {
+    "jp": "町",
+    "fr": "ville / bourg",
+    "reading": "まち",
+    "jp_html": "<ruby>町<rt>まち</rt></ruby>"
+  },
+  {
+    "jp": "温泉",
+    "fr": "source chaude / onsen",
+    "reading": "おんせん",
+    "jp_html": "<ruby>温泉<rt>おんせん</rt></ruby>"
+  },
+  {
+    "jp": "川",
+    "fr": "rivière",
+    "reading": "かわ",
+    "jp_html": "<ruby>川<rt>かわ</rt></ruby>"
+  },
+  {
+    "jp": "山",
+    "fr": "montagne",
+    "reading": "やま",
+    "jp_html": "<ruby>山<rt>やま</rt></ruby>"
+  },
+  {
+    "jp": "海",
+    "fr": "mer / océan",
+    "reading": "うみ",
+    "jp_html": "<ruby>海<rt>うみ</rt></ruby>"
+  },
+  {
+    "jp": "公園",
+    "fr": "parc",
+    "reading": "こうえん",
+    "jp_html": "<ruby>公園<rt>こうえん</rt></ruby>"
+  },
+  {
+    "jp": "図書館",
+    "fr": "bibliothèque",
+    "reading": "としょかん",
+    "jp_html": "<ruby>図書館<rt>としょかん</rt></ruby>"
+  },
+  {
+    "jp": "病院",
+    "fr": "hôpital",
+    "reading": "びょういん",
+    "jp_html": "<ruby>病院<rt>びょういん</rt></ruby>"
+  },
+  {
+    "jp": "郵便局",
+    "fr": "bureau de poste",
+    "reading": "ゆうびんきょく",
+    "jp_html": "<ruby>郵便局<rt>ゆうびんきょく</rt></ruby>"
+  },
+  {
+    "jp": "銀行",
+    "fr": "banque",
+    "reading": "ぎんこう",
+    "jp_html": "<ruby>銀行<rt>ぎんこう</rt></ruby>"
+  },
+  {
+    "jp": "体育館",
+    "fr": "gymnase",
+    "reading": "たいいくかん",
+    "jp_html": "<ruby>体育館<rt>たいいくかん</rt></ruby>"
+  },
+  {
+    "jp": "会社",
+    "fr": "entreprise / bureau",
+    "reading": "かいしゃ",
+    "jp_html": "<ruby>会社<rt>かいしゃ</rt></ruby>"
+  },
+  {
+    "jp": "学校",
+    "fr": "école",
+    "reading": "がっこう",
+    "jp_html": "<ruby>学校<rt>がっこう</rt></ruby>"
+  },
+  {
+    "jp": "コンビニ",
+    "fr": "supérette (konbini)",
+    "reading": "",
+    "jp_html": "コンビニ"
+  },
+  {
+    "jp": "うち",
+    "fr": "maison / chez moi",
+    "reading": "",
+    "jp_html": "うち"
+  },
+  {
+    "jp": "新しい",
+    "fr": "nouveau",
+    "reading": "あたらしい",
+    "jp_html": "<ruby>新<rt>あたら</rt></ruby>しい"
+  },
+    {"jp": "古い", "fr": "ancien / vieux", "reading": "ふるい", "jp_html": "<ruby>古<rt>ふる</rt></ruby>い"},
+    {"jp": "いい", "fr": "bon", "reading": "", "jp_html": "いい"},
+    {"jp": "大きい", "fr": "grand", "reading": "おおきい", "jp_html": "<ruby>大<rt>おお</rt></ruby>きい"},
+    {"jp": "小さい", "fr": "petit", "reading": "ちいさい", "jp_html": "<ruby>小<rt>ちい</rt></ruby>さい"},
+    {"jp": "高い", "fr": "haut / grand (taille)", "reading": "たかい", "jp_html": "<ruby>高<rt>たか</rt></ruby>い"},
+    {"jp": "低い", "fr": "bas", "reading": "ひくい", "jp_html": "<ruby>低<rt>ひく</rt></ruby>い"},
+    {"jp": "きれい（な）", "fr": "beau / propre", "reading": "", "jp_html": "きれい（な）"},
+    {"jp": "静か（な）", "fr": "calme / silencieux", "reading": "しずか", "jp_html": "<ruby>静<rt>しず</rt></ruby>か（な）"},
+    {"jp": "にぎやか（な）", "fr": "animé", "reading": "", "jp_html": "にぎやか（な）"},
+    {"jp": "有名（な）", "fr": "célèbre", "reading": "ゆうめい", "jp_html": "<ruby>有名（<rt>ゆう</rt></ruby>な）"},
+    {"jp": "暖かい", "fr": "chaud (doux)", "reading": "あたたかい", "jp_html": "<ruby>暖<rt>あたた</rt></ruby>かい"},
+    {"jp": "涼しい", "fr": "frais", "reading": "すずしい", "jp_html": "<ruby>涼<rt>すず</rt></ruby>しい"},
+    {"jp": "暑い", "fr": "chaud (météo)", "reading": "あつい", "jp_html": "<ruby>暑<rt>あつ</rt></ruby>い"},
+    {"jp": "寒い", "fr": "froid (météo)", "reading": "さむい", "jp_html": "<ruby>寒<rt>さむ</rt></ruby>い"},
+    {"jp": "天気がいい", "fr": "il fait beau / beau temps", "reading": "てんきがいい", "jp_html": "<ruby>天気<rt>てんき</rt></ruby>がいい"},
+    {"jp": "天気が悪い", "fr": "il fait mauvais / mauvais temps", "reading": "てんきがわるい", "jp_html": "<ruby>天気<rt>てんきが</rt></ruby>が悪い"},
+    {"jp": "温かい", "fr": "chaud (doux)", "reading": "あたたかい", "jp_html": "<ruby>温<rt>あたた</rt></ruby>かい"},
+    {"jp": "熱い", "fr": "chaud (au toucher)", "reading": "あつい", "jp_html": "<ruby>熱<rt>あつ</rt></ruby>い"},
+    {"jp": "冷たい", "fr": "froid (au toucher)", "reading": "つめたい", "jp_html": "<ruby>冷<rt>つめ</rt></ruby>たい"},
+    {"jp": "おいしい", "fr": "délicieux", "reading": "", "jp_html": "おいしい"},
+    {"jp": "甘い", "fr": "sucré", "reading": "あまい", "jp_html": "<ruby>甘<rt>あま</rt></ruby>い"},
+    {"jp": "辛い", "fr": "épicé / piquant", "reading": "からい", "jp_html": "<ruby>辛<rt>から</rt></ruby>い"},
+    {"jp": "苦い", "fr": "amer", "reading": "にがい", "jp_html": "<ruby>苦<rt>にが</rt></ruby>い"},
+    {"jp": "すっぱい", "fr": "acide", "reading": "", "jp_html": "すっぱい"},
+    {"jp": "（〜が）多い", "fr": "beaucoup de ~", "reading": "おおい", "jp_html": "<ruby>（〜<rt>おお</rt></ruby>が）多い"},
+    {"jp": "（〜が）少ない", "fr": "peu de ~", "reading": "すくない", "jp_html": "<ruby>（〜<rt>すくな</rt></ruby>が）少ない"},
+    {"jp": "たくさん", "fr": "beaucoup", "reading": "", "jp_html": "たくさん"},
+    {"jp": "少し", "fr": "un peu", "reading": "すこし", "jp_html": "<ruby>少<rt>すこ</rt></ruby>し"},
+    {"jp": "とても", "fr": "très", "reading": "", "jp_html": "とても"},
+    {"jp": "あまり", "fr": "pas très / pas tellement", "reading": "", "jp_html": "あまり"},
+    {"jp": "〜ぐらい", "fr": "environ", "reading": "", "jp_html": "〜ぐらい"},
+    {"jp": "一年中", "fr": "toute l'année", "reading": "いちねんじゅう", "jp_html": "<ruby>一年中<rt>いちねんじゅう</rt></ruby>"},
+    {"jp": "朝", "fr": "matin", "reading": "あさ", "jp_html": "<ruby>朝<rt>あさ</rt></ruby>"},
+    {"jp": "夜", "fr": "nuit / soir", "reading": "よる", "jp_html": "<ruby>夜<rt>よる</rt></ruby>"},
+    {"jp": "毎日", "fr": "tous les jours", "reading": "まいにち", "jp_html": "<ruby>毎日<rt>まいにち</rt></ruby>"},
+    {"jp": "毎朝", "fr": "tous les matins", "reading": "まいあさ", "jp_html": "<ruby>毎朝<rt>まいあさ</rt></ruby>"},
+    {"jp": "毎晩", "fr": "tous les soirs", "reading": "まいばん", "jp_html": "<ruby>毎晩<rt>まいばん</rt></ruby>"},
+    {"jp": "昼", "fr": "après-midi / midi (selon contexte)", "reading": "ひる", "jp_html": "<ruby>昼<rt>ひる</rt></ruby>"},
+    {"jp": "今", "fr": "maintenant", "reading": "いま", "jp_html": "<ruby>今<rt>いま</rt></ruby>"},
+    {"jp": "午前", "fr": "A.M. / matin (avant-midi)", "reading": "ごぜん", "jp_html": "<ruby>午前<rt>ごぜん</rt></ruby>"},
+    {"jp": "午後", "fr": "P.M. / après-midi", "reading": "ごご", "jp_html": "<ruby>午後<rt>ごご</rt></ruby>"},
+    {"jp": "週末", "fr": "week-end", "reading": "しゅうまつ", "jp_html": "<ruby>週末<rt>しゅうまつ</rt></ruby>"},
+    {"jp": "時間", "fr": "temps / heure(s)", "reading": "じかん", "jp_html": "<ruby>時間<rt>じかん</rt></ruby>"},
+    {"jp": "休み", "fr": "fermé / repos / congé", "reading": "やすみ", "jp_html": "<ruby>休<rt>やす</rt></ruby>み"},
+    {"jp": "〜時", "fr": "~ heure(s) (pour l'heure)", "reading": "じ", "jp_html": "<ruby>〜時<rt>じ</rt></ruby>"},
+    {"jp": "〜分", "fr": "~ minutes", "reading": "ふん", "jp_html": "<ruby>〜分<rt>ふん</rt></ruby>"},
+    {"jp": "〜時半", "fr": "~h30", "reading": "じはん", "jp_html": "<ruby>〜時半<rt>じはん</rt></ruby>"},
+    {"jp": "〜曜日", "fr": "~ jour (ex: lundi)", "reading": "ようび", "jp_html": "<ruby>〜曜日<rt>ようび</rt></ruby>"},
+    {"jp": "１年", "fr": "1 an (une année)", "reading": "いちねん", "jp_html": "<ruby>１年<rt>いちねん</rt></ruby>"},
+    {"jp": "北", "fr": "nord", "reading": "きた", "jp_html": "<ruby>北<rt>きた</rt></ruby>"},
+    {"jp": "南", "fr": "sud", "reading": "みなみ", "jp_html": "<ruby>南<rt>みなみ</rt></ruby>"},
+    {"jp": "東", "fr": "est", "reading": "ひがし", "jp_html": "<ruby>東<rt>ひがし</rt></ruby>"},
+    {"jp": "西", "fr": "ouest", "reading": "にし", "jp_html": "<ruby>西<rt>にし</rt></ruby>"},
+    {"jp": "真ん中", "fr": "milieu / centre", "reading": "まんなか", "jp_html": "<ruby>真<rt>まん</rt></ruby>ん中"},
+    {"jp": "電車", "fr": "train", "reading": "でんしゃ", "jp_html": "<ruby>電車<rt>でんしゃ</rt></ruby>"},
+    {"jp": "飛行機", "fr": "avion", "reading": "ひこうき", "jp_html": "<ruby>飛行機<rt>ひこうき</rt></ruby>"},
+    {"jp": "車", "fr": "voiture", "reading": "くるま", "jp_html": "<ruby>車<rt>くるま</rt></ruby>"},
+    {"jp": "新幹線", "fr": "Shinkansen (TGV japonais)", "reading": "しんかんせん", "jp_html": "<ruby>新幹線<rt>しんかんせん</rt></ruby>"},
+    {"jp": "バス", "fr": "bus", "reading": "", "jp_html": "バス"},
+    {"jp": "歩いて", "fr": "à pied / en marchant", "reading": "あるいて", "jp_html": "<ruby>歩<rt>ある</rt></ruby>いて"},
+    {"jp": "メロン", "fr": "melon", "reading": "", "jp_html": "メロン"},
+    {"jp": "チョコレート", "fr": "chocolat", "reading": "", "jp_html": "チョコレート"},
+    {"jp": "（お）酒", "fr": "alcool / saké", "reading": "おさけ", "jp_html": "<ruby>（<rt></rt></ruby>お）酒"},
+    {"jp": "（お）すし", "fr": "sushi", "reading": "おすし", "jp_html": "（お）すし"},
+    {"jp": "（お）弁当", "fr": "bento", "reading": "おべんとう", "jp_html": "<ruby>（<rt>お</rt></ruby>お）弁当"},
+    {"jp": "牛乳", "fr": "lait", "reading": "ぎゅうにゅう", "jp_html": "<ruby>牛乳<rt>ぎゅうにゅう</rt></ruby>"},
+    {"jp": "果物", "fr": "fruit", "reading": "くだもの", "jp_html": "<ruby>果物<rt>くだもの</rt></ruby>"},
+    {"jp": "サラダ", "fr": "salade", "reading": "", "jp_html": "サラダ"},
+    {"jp": "チーズ", "fr": "fromage", "reading": "", "jp_html": "チーズ"},
+    {"jp": "行きます", "fr": "aller", "reading": "いきます", "jp_html": "<ruby>行<rt>い</rt></ruby>きます"},
+    {"jp": "帰ります", "fr": "rentrer / retourner", "reading": "かえります", "jp_html": "<ruby>帰<rt>かえ</rt></ruby>ります"},
+    {"jp": "飲みます", "fr": "boire", "reading": "のみます", "jp_html": "<ruby>飲<rt>の</rt></ruby>みます"},
+    {"jp": "食べます", "fr": "manger", "reading": "たべます", "jp_html": "<ruby>食<rt>た</rt></ruby>べます"},
+    {"jp": "見ます", "fr": "voir / regarder", "reading": "みます", "jp_html": "<ruby>見<rt>み</rt></ruby>ます"},
+    {"jp": "します", "fr": "faire", "reading": "します", "jp_html": "します"},
+    {"jp": "聞きます", "fr": "écouter", "reading": "ききます", "jp_html": "<ruby>聞<rt>き</rt></ruby>きます"},
+    {"jp": "働きます", "fr": "travailler", "reading": "はたらきます", "jp_html": "<ruby>働<rt>はたら</rt></ruby>きます"},
+    {"jp": "読みます", "fr": "lire", "reading": "よみます", "jp_html": "<ruby>読<rt>よ</rt></ruby>みます"},
+    {"jp": "起きます", "fr": "se réveiller / se lever", "reading": "おきます", "jp_html": "<ruby>起<rt>お</rt></ruby>きます"},
+    {"jp": "寝ます", "fr": "dormir / se coucher", "reading": "ねます", "jp_html": "<ruby>寝<rt>ね</rt></ruby>ます"},
+    {"jp": "勉強します", "fr": "étudier", "reading": "べんきょうします", "jp_html": "<ruby>勉強<rt>べんきょう</rt></ruby>します"},
+    {"jp": "来ます", "fr": "venir", "reading": "きます", "jp_html": "<ruby>来<rt>き</rt></ruby>ます"},
+    {"jp": "買います", "fr": "acheter", "reading": "かいます", "jp_html": "<ruby>買<rt>か</rt></ruby>います"},
+    {"jp": "あります", "fr": "il y a / exister", "reading": "あります", "jp_html": "あります"},
+    {"jp": "皆さん", "fr": "tout le monde", "reading": "みなさん", "jp_html": "<ruby>皆<rt>みな</rt></ruby>さん"},
+    {"jp": "いろいろ（な）", "fr": "divers / plusieurs sortes", "reading": "", "jp_html": "いろいろ（な）"},
+    {"jp": "ぜひ来てください", "fr": "venez, je vous en prie", "reading": "ぜひきてください", "jp_html": "<ruby><rt></rt></ruby>ぜひ来てください"},
+    {"jp": "どんな", "fr": "quel / comment (état)", "reading": "", "jp_html": "どんな"},
+    {"jp": "どう", "fr": "comment", "reading": "", "jp_html": "どう"},
+    {"jp": "何", "fr": "quoi", "reading": "なに", "jp_html": "<ruby>何<rt>なに</rt></ruby>"},
+    {"jp": "何も", "fr": "rien", "reading": "なにも", "jp_html": "<ruby>何<rt>なに</rt></ruby>も"},
+    {"jp": "どこ（へ）も", "fr": "nulle part", "reading": "", "jp_html": "どこ（へ）も"},
+    {"jp": "そうですね", "fr": "oui, c’est ça / en effet", "reading": "", "jp_html": "そうですね"},
+    {"jp": "いいですね", "fr": "c'est bien / sympa", "reading": "", "jp_html": "いいですね"},
+    {"jp": "えっ", "fr": "hein ? / quoi ?", "reading": "", "jp_html": "えっ"},
+    {"jp": "へえ", "fr": "ah bon ?", "reading": "", "jp_html": "へえ"},
+    {"jp": "これから", "fr": "à partir de maintenant", "reading": "", "jp_html": "これから"}
+    {
+  "jp": "日",
+  "fr": "jour",
+  "reading": "ひ",
+  "jp_html": "<ruby>日<rt>ひ</rt></ruby>"
+},
+{
+  "jp": "近く",
+  "fr": "près / à proximité",
+  "reading": "ちかく",
+  "jp_html": "<ruby>近<rt>ちか</rt></ruby>く"
+},
+{
+  "jp": "また",
+  "fr": "encore / à nouveau",
+  "reading": "",
+  "jp_html": "また"
+},
+{
+  "jp": "今日",
+  "fr": "aujourd’hui",
+  "reading": "きょう",
+  "jp_html": "<ruby>今日<rt>きょう</rt></ruby>"
+},
+{
+  "jp": "明日",
+  "fr": "demain",
+  "reading": "あした",
+  "jp_html": "<ruby>明日<rt>あした</rt></ruby>"
+},
+{
+  "jp": "あさって",
+  "fr": "après-demain",
+  "reading": "",
+  "jp_html": "あさって"
+},
+{
+  "jp": "昨日",
+  "fr": "hier",
+  "reading": "きのう",
+  "jp_html": "<ruby>昨日<rt>きのう</rt></ruby>"
+},
+{
+  "jp": "おととい",
+  "fr": "avant-hier",
+  "reading": "",
+  "jp_html": "おととい"
+},
+{
+  "jp": "先週",
+  "fr": "la semaine dernière",
+  "reading": "せんしゅう",
+  "jp_html": "<ruby>先週<rt>せんしゅう</rt></ruby>"
+},
+{
+  "jp": "週末",
+  "fr": "week-end",
+  "reading": "しゅうまつ",
+  "jp_html": "<ruby>週末<rt>しゅうまつ</rt></ruby>"
+},
+{
+  "jp": "家",
+  "fr": "maison",
+  "reading": "いえ",
+  "jp_html": "<ruby>家<rt>いえ</rt></ruby>"
+},
+{
+  "jp": "部屋",
+  "fr": "chambre / pièce",
+  "reading": "へや",
+  "jp_html": "<ruby>部屋<rt>へや</rt></ruby>"
+},
+{
+  "jp": "デパート",
+  "fr": "grand magasin",
+  "reading": "",
+  "jp_html": "デパート"
+},
+{
+  "jp": "美術館",
+  "fr": "musée d’art",
+  "reading": "びじゅつかん",
+  "jp_html": "<ruby>美術館<rt>びじゅつかん</rt></ruby>"
+},
+{
+  "jp": "ゲーム",
+  "fr": "jeu / jeu vidéo",
+  "reading": "",
+  "jp_html": "ゲーム"
+},
+{
+  "jp": "一人で",
+  "fr": "seul(e)",
+  "reading": "ひとりで",
+  "jp_html": "<ruby>一人<rt>ひとり</rt></ruby>で"
+},
+{
+  "jp": "今朝",
+  "fr": "ce matin",
+  "reading": "けさ",
+  "jp_html": "<ruby>今朝<rt>けさ</rt></ruby>"
+},
+{
+  "jp": "先月",
+  "fr": "le mois dernier",
+  "reading": "せんげつ",
+  "jp_html": "<ruby>先月<rt>せんげつ</rt></ruby>"
+},
+{
+  "jp": "去年",
+  "fr": "l’année dernière",
+  "reading": "きょねん",
+  "jp_html": "<ruby>去年<rt>きょねん</rt></ruby>"
+},
+{
+  "jp": "嵐",
+  "fr": "tempête",
+  "reading": "あらし",
+  "jp_html": "<ruby>嵐<rt>あらし</rt></ruby>"
+},
+{
+  "jp": "天気",
+  "fr": "temps / météo",
+  "reading": "てんき",
+  "jp_html": "<ruby>天気<rt>てんき</rt></ruby>"
+},
+{
+  "jp": "晩ご飯",
+  "fr": "dîner",
+  "reading": "ばんごはん",
+  "jp_html": "<ruby>晩<rt>ばん</rt></ruby>ご<ruby>飯<rt>はん</rt></ruby>"
+},
+{
+  "jp": "服",
+  "fr": "vêtements",
+  "reading": "ふく",
+  "jp_html": "<ruby>服<rt>ふく</rt></ruby>"
+},
+{
+  "jp": "登ります",
+  "fr": "monter / gravir",
+  "reading": "のぼります",
+  "jp_html": "<ruby>登<rt>のぼ</rt></ruby>ります"
+},
+{
+  "jp": "入ります",
+  "fr": "entrer",
+  "reading": "はいります",
+  "jp_html": "<ruby>入<rt>はい</rt></ruby>ります"
+},
+{
+  "jp": "温泉に入ります",
+  "fr": "entrer dans un onsen",
+  "reading": "おんせんにはいります",
+  "jp_html": "<ruby>温泉<rt>おんせん</rt></ruby>に<ruby>入<rt>はい</rt></ruby>ります"
+},
+{
+  "jp": "忙しい",
+  "fr": "occupé",
+  "reading": "いそがしい",
+  "jp_html": "<ruby>忙<rt>いそが</rt></ruby>しい"
+},
+{
+  "jp": "おもしろい",
+  "fr": "intéressant / drôle",
+  "reading": "",
+  "jp_html": "おもしろい"
+},
+{
+  "jp": "気持ちがいい",
+  "fr": "agréable / se sentir bien",
+  "reading": "きもちがいい",
+  "jp_html": "<ruby>気持<rt>きも</rt></ruby>ちがいい"
+},
+{
+  "jp": "高い",
+  "fr": "cher / haut",
+  "reading": "たかい",
+  "jp_html": "<ruby>高<rt>たか</rt></ruby>い"
+},
+{
+  "jp": "安い",
+  "fr": "pas cher",
+  "reading": "やすい",
+  "jp_html": "<ruby>安<rt>やす</rt></ruby>い"
+},
+{
+  "jp": "楽しい",
+  "fr": "amusant",
+  "reading": "たのしい",
+  "jp_html": "<ruby>楽<rt>たの</rt></ruby>しい"
+},
+{
+  "jp": "難しい",
+  "fr": "difficile",
+  "reading": "むずかしい",
+  "jp_html": "<ruby>難<rt>むずか</rt></ruby>しい"
+},
+{
+  "jp": "簡単",
+  "fr": "simple",
+  "reading": "かんたん",
+  "jp_html": "<ruby>簡単<rt>かんたん</rt></ruby>"
+},
+{
+  "jp": "暇",
+  "fr": "libre / temps libre",
+  "reading": "ひま",
+  "jp_html": "<ruby>暇<rt>ひま</rt></ruby>"
+},
+{
+  "jp": "どうして",
+  "fr": "pourquoi",
+  "reading": "",
+  "jp_html": "どうして"
+},
+{
+  "jp": "皆さん",
+  "fr": "tout le monde",
+  "reading": "みなさん",
+  "jp_html": "<ruby>皆<rt>みな</rt></ruby>さん"
+},
+{
+  "jp": "今週",
+  "fr": "cette semaine",
+  "reading": "こんしゅう",
+  "jp_html": "<ruby>今週<rt>こんしゅう</rt></ruby>"
+},
+{
+  "jp": "来週",
+  "fr": "la semaine prochaine",
+  "reading": "らいしゅう",
+  "jp_html": "<ruby>来週<rt>らいしゅう</rt></ruby>"
+},
+{
+  "jp": "今月",
+  "fr": "ce mois-ci",
+  "reading": "こんげつ",
+  "jp_html": "<ruby>今月<rt>こんげつ</rt></ruby>"
+},
+{
+  "jp": "来月",
+  "fr": "le mois prochain",
+  "reading": "らいげつ",
+  "jp_html": "<ruby>来月<rt>らいげつ</rt></ruby>"
+},
+{
+  "jp": "あります",
+  "fr": "il y a",
+  "reading": "あります",
+  "jp_html": "あります"
+}
+  ];
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
